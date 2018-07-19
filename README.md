@@ -15,7 +15,7 @@ npm i
 ```
 ## Setting Connection
 
-update config connection db in `.env` for production
+update config connection db in `env.txt` for production
 
 ```
 DB_HOST=127.0.0.1
@@ -30,6 +30,7 @@ PORT=3000
 
 ## Running
 ```
+cp env.txt .env
 npm start
 ```
 open browser and go to http://localhost:3000
@@ -39,3 +40,4 @@ open browser and go to http://localhost:3000
 pm2 start --interpreter ts-node src/bin/www.ts MyServerName
 
 ```
+
