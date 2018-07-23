@@ -3,7 +3,7 @@
 import * as express from 'express';
 import * as moment from 'moment';
 
-import { KpiSumModel } from './../models/kpiSum';
+import { KpiSumModel } from '../models/kpiSum';
 
 const router = express.Router();
 
