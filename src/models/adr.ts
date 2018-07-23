@@ -19,9 +19,9 @@ export class adrModel {
     return knex(this.tableName)
     .column(           
     `b_item_drug_standard.item_drug_standard_description AS drug,`
-    ,`regexp_replace(t_patient_drug_allergy.drug_allergy_symtom, '\r|\n', '', 'g') AS adr,`
-    ,`substring(t_patient_drug_allergy.record_date_time,1,10) AS recdate,`
-    ,`doc.employee_firstname ||' '||  doc.employee_lastname as pharid`)
+    ,`t_patient_drug_allergy.drug_allergy_symtom  AS adr,`
+    ,`doc.employee_firstname` , `doc.employee_lastname `)
+    .column(knex.raw('substring(t_patient_drug_allergy.record_date_time,1,10) AS recdate'))
     .innerJoin('b_item_drug_standard','t_patient_drug_allergy.b_item_drug_standard_id','=','b_item_drug_standard.b_item_drug_standard_id')
 
     .leftJoin('b_employee as doc','t_patient_drug_allergy.pharma_assess_id','=','doc.b_employee_id')
