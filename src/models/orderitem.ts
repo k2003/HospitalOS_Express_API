@@ -15,7 +15,7 @@ export class OrderItemModel {
   }
 
 
-  detail(knex: Knex, id: string, limit: number = 50 , offset: number = 0) {
+  detail(knex: Knex, id: string, limit: number = 100 , offset: number = 0) {
     return knex(this.tableName)
     .column(           
         't_order.f_item_group_id as gid',

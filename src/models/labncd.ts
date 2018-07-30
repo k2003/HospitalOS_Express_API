@@ -15,7 +15,7 @@ export class labNcdModel {
   }
 
 
-  detail(knex: Knex, id: string, limit: number = 100 , offset: number = 0) {
+  detail(knex: Knex, id: string, limit: number = 150 , offset: number = 0) {
     return knex(this.tableName)
     .column(knex.raw('substring(t_visit.visit_begin_visit_time,1,10) as datevisit'))
     .column('b_item_lab_ncd_std.b_item_lab_ncd_std_id as ncdid'

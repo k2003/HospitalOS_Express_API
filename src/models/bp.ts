@@ -15,7 +15,7 @@ export class bpModel {
   }
 
 
-  detail(knex: Knex, id: string, limit: number = 20 , offset: number = 0) {
+  detail(knex: Knex, id: string, limit: number = 30 , offset: number = 0) {
     return knex(this.tableName)
     .column(           
     't_visit_vital_sign.t_patient_id' 

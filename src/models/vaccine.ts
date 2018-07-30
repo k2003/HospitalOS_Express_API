@@ -8,7 +8,7 @@ export class vaccineModel {
 
 
 
-  list(knex: Knex, limit: number = 100, offset: number = 0) {
+  list(knex: Knex, limit: number = 20, offset: number = 0) {
     return knex(this.tableName)
       .limit(limit)
       .offset(offset);
@@ -17,9 +17,9 @@ export class vaccineModel {
 
   detail(knex: Knex, id: string, limit: number = 50 , offset: number = 0) {
     return knex(this.tableName)
-    .column(           
+    .column(
     `t_health_epi_detail.t_patient_id`
-    ,`b_health_epi_group.health_epi_group_description as vacc,`
+    ,`b_health_epi_group.health_epi_group_description as vacc`
     ,`doc.employee_firstname` , `doc.employee_lastname `)
     .column(knex.raw('substr(t_health_epi_detail.record_date_time,1,10) as recdate'))
    

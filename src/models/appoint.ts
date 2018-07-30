@@ -8,7 +8,7 @@ export class appointModel {
 
 
 
-  list(knex: Knex, limit: number = 100, offset: number = 0) {
+  list(knex: Knex, limit: number = 20, offset: number = 0) {
     return knex(this.tableName)
       .limit(limit)
       .offset(offset);
