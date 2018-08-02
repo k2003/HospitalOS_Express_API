@@ -18,8 +18,8 @@ export class adrModel {
   detail(knex: Knex, id: string, limit: number = 50 , offset: number = 0) {
     return knex(this.tableName)
     .column(           
-    `b_item_drug_standard.item_drug_standard_description AS drug,`
-    ,`t_patient_drug_allergy.drug_allergy_symtom  AS adr,`
+    `b_item_drug_standard.item_drug_standard_description AS drug`
+    ,`t_patient_drug_allergy.drug_allergy_symtom  AS adr`
     ,`doc.employee_firstname` , `doc.employee_lastname `)
     .column(knex.raw('substring(t_patient_drug_allergy.record_date_time,1,10) AS recdate'))
     .innerJoin('b_item_drug_standard','t_patient_drug_allergy.b_item_drug_standard_id','=','b_item_drug_standard.b_item_drug_standard_id')

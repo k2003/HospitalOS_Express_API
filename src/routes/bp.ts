@@ -28,6 +28,23 @@ router.get('/', (req, res, next) => {
 
 
 
+router.get('/bmi/:id', (req, res, next) => {
+  let id = req.params.id;
+  let db = req.db;
+
+  model.bmi(db, id)
+    .then((results: any) => {
+    //  res.send({ ok: true, detail: results })
+     // res.send({ ok: true, detail: results })
+      res.send({ ok: true, bmi: results });
+    })
+    .catch(error => {
+      res.send({ ok: false, error: error })
+    })
+    .finally(() => {
+      db.destroy();
+    });
+});
 router.get('/detail/:id', (req, res, next) => {
   let id = req.params.id;
   let db = req.db;

@@ -18,8 +18,7 @@ export class vaccineModel {
   detail(knex: Knex, id: string, limit: number = 50 , offset: number = 0) {
     return knex(this.tableName)
     .column(
-    `t_health_epi_detail.t_patient_id`
-    ,`b_health_epi_group.health_epi_group_description as vacc`
+    `b_health_epi_group.health_epi_group_description as vacc`
     ,`doc.employee_firstname` , `doc.employee_lastname `)
     .column(knex.raw('substr(t_health_epi_detail.record_date_time,1,10) as recdate'))
    
@@ -28,7 +27,7 @@ export class vaccineModel {
     
     .where('t_health_epi_detail.health_epi_detail_active','1')
        .where('t_health_epi_detail.t_patient_id',id)
-      .orderBy('t_health_epi_detail.record_date_time', 'asc')
+      .orderBy('t_health_epi_detail.record_date_time', 'DESC')
       .limit(limit)
       .offset(offset);
   }

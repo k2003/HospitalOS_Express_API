@@ -20,7 +20,7 @@ export class ProfileModel {
   //   .where('employee_active', '1')
 
   //    .orderBy('start_date', 'ASC')
-     .limit(5);
+     .limit(1);
 
   //  return db.raw('SELECT b_site.b_visit_office_id as pcucode,         b_employee.employee_login AS username,   b_employee.employee_password as password,    b_employee.f_employee_authentication_id AS grouplevel,   t_person.person_firstname  ,      t_person.person_firstname ,    t_person.person_lastname AS lname, t_person.person_pid ,    b_employee.provider,       f_employee_authentication.employee_authentication_description as alevel    FROM b_employee     INNER JOIN f_provider_type ON b_employee.f_provider_type_id = f_provider_type.f_provider_type_id     INNER JOIN  t_person ON b_employee.t_person_id=t_person.t_person_id    LEFT JOIN t_patient ON t_person.person_pid=t_patient.patient_pid    LEFT JOIN f_employee_authentication ON b_employee.f_employee_authentication_id=f_employee_authentication.f_employee_authentication_id , b_site')  ;
 //  return db.raw('select provider, employee_login, employee_firstname, employee_lastname, description, person_pid, base64url.decode(picture_profile) from b_employee innerjoin f_provider_type on b_employee.f_provider_type_id = f_provider_type.f_provider_type_id inner join t_person on b_employee.t_person_id = t_person.t_person_id left join t_patient on t_person.person_pid = t_patient.patient_pid  order by start_date ASC');

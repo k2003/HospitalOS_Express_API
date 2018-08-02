@@ -31,6 +31,26 @@ export class bpModel {
       .limit(limit)
       .offset(offset);
   }
+  bmi(knex: Knex, id: string, limit: number = 1 , offset: number = 0) {
+    return knex(this.tableName)
+    .column(           
+    't_visit_vital_sign.visit_vital_sign_weight as weight' 
+    ,'t_visit_vital_sign.visit_vital_sign_height as height' 
+    ,'t_visit_vital_sign.visit_vital_sign_bmi as bmi'
+    ,'t_visit_vital_sign.record_date')
+
+
+  .innerJoin(knex.raw(`(select Max(t_visit_vital_sign.record_date) as record_date ,t_visit_vital_sign.t_patient_id FROM t_visit_vital_sign  WHERE t_visit_vital_sign.visit_vital_sign_bmi is not null group by t_visit_vital_sign.t_patient_id) as bmi`) , function() {
+      this.on('t_visit_vital_sign.record_date', '=', 'bmi.record_date').andOn('t_visit_vital_sign.t_patient_id', '=', 'bmi.t_patient_id')
+      
+    })
+
+
+    .where('t_visit_vital_sign.t_patient_id',id)
+     
+      .limit(limit)
+      .offset(offset);
+  }
 
  
 
