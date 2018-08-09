@@ -6,7 +6,7 @@ import { Jwt } from './models/jwt';
 
 import * as express from 'express';
 import * as path from 'path';
-import * as favicon from 'serve-favicon';
+//import * as favicon from 'serve-favicon';
 import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
@@ -109,20 +109,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/login', checkAuth,loginRoute);
-app.use('/contacts', contactRoute);
+app.use('/login',loginRoute);
+app.use('/contacts',checkAuth, contactRoute);
 app.use('/service', checkAuth, serviceRoute);
-app.use('/family', familyRoute);
+app.use('/family',checkAuth, familyRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum',checkAuth, kpiSum);
-app.use('/myapi', myApi);
-app.use('/profile' , profileRoute);
-app.use('/appoint' , appointRoute);
-app.use('/drugallergy' , adrRoute);
-app.use('/vaccine' , vaccineRoute);
-app.use('/bp' , bpRoute);
-app.use('/order' , OrderItemRoute);
-app.use('/lab' , LabNcdRoute);
+app.use('/myapi',checkAuth, myApi);
+app.use('/profile' ,checkAuth, profileRoute);
+app.use('/appoint' , checkAuth,appointRoute);
+app.use('/drugallergy' ,checkAuth, adrRoute);
+app.use('/vaccine' ,checkAuth, vaccineRoute);
+app.use('/bp' ,checkAuth, bpRoute);
+app.use('/order' ,checkAuth, OrderItemRoute);
+app.use('/lab' ,checkAuth, LabNcdRoute);
 app.use('/site' , SiteRoute);
 app.use('/', indexRoute);
 
