@@ -109,9 +109,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/login', loginRoute);
+app.use('/login', checkAuth,loginRoute);
 app.use('/contacts', contactRoute);
-app.use('/service', serviceRoute);
+app.use('/service', checkAuth, serviceRoute);
 app.use('/family', familyRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum',checkAuth, kpiSum);

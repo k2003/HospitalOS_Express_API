@@ -36,7 +36,7 @@ export class serviceModel {
     // .whereNot('t_visit.f_visit_status_id','1')
     .where('d.diag_icd10_active','1')
     .where('d.f_diag_icd10_type_id','1')
-    .whereNot('t_visit_primary_symptom.visit_primary_symptom_main_symptom','')
+  //.whereNot('t_visit_primary_symptom.visit_primary_symptom_main_symptom','')
       .where('b.employee_login', id)
       .orderBy('t_visit.visit_begin_visit_time', 'DESC')
       .limit(limit)

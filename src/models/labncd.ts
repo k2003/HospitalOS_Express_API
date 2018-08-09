@@ -27,12 +27,11 @@ export class labNcdModel {
     .innerJoin('t_visit' , 't_visit.t_visit_id' ,'=' ,'t_result_lab.t_visit_id' ) 
     .innerJoin('b_item_map_lab_ncd','t_result_lab.b_item_id','=','b_item_map_lab_ncd.b_item_id')
     .innerJoin('b_item_lab_ncd_std','b_item_map_lab_ncd.b_item_lab_ncd_std_id','=','b_item_lab_ncd_std.b_item_lab_ncd_std_id')
-    .where({'t_result_lab.result_lab_active':'1','t_visit.f_visit_status_id':'3',
+    .where({'t_result_lab.result_lab_active':'1',
      'b_item_map_lab_ncd.active':'1','b_item_lab_ncd_std.active':'1'})
     .whereIn('b_item_lab_ncd_std.b_item_lab_ncd_std_id', ['ncd201000000000004' 
      ,'ncd201000000000002','ncd201000000000003','ncd201000000000006','ncd201000000000008'
      ,'ncd201000000000007','ncd201000000000009','ncd201000000000010','ncd201000000000030'])
-  //  .whereRaw(`t_result_lab.result_lab_'value ~'^([0-9]+\.?[0-9]*|\.[0-9]+)$'`)
     .where('t_result_lab.result_lab_value', '~',`^([0-9]+\.?[0-9]*|\.[0-9]+)$`)
     .where('t_visit.t_patient_id',id)
       .orderBy('t_visit.visit_begin_visit_time','DESC')
