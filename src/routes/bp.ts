@@ -62,6 +62,22 @@ router.get('/detail/:id', (req, res, next) => {
       db.destroy();
     });
 });
+router.get('/chart/:id', (req, res, next) => {
+  let id = req.params.id;
+  let db = req.db;
+
+  model.chart(db, id)
+    .then((results: any) => {
+
+      res.send({ ok: true, chart: results });
+    })
+    .catch(error => {
+      res.send({ ok: false, error: error })
+    })
+    .finally(() => {
+      db.destroy();
+    });
+});
 
 
 

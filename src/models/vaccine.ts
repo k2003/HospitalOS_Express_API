@@ -20,7 +20,8 @@ export class vaccineModel {
     .column(
     `b_health_epi_group.health_epi_group_description as vacc`
     ,`doc.employee_firstname` , `doc.employee_lastname `)
-    .column(knex.raw('substr(t_health_epi_detail.record_date_time,1,10) as recdate'))
+    //.column(knex.raw('substr(t_health_epi_detail.record_date_time,1,10) as recdate'))
+    .column(knex.raw(`json_build_object('subtitle',substr(t_health_epi_detail.record_date_time,1,10) ,'title',substr(t_health_epi_detail.record_date_time,12,5)) as time`))
    
     .leftJoin('b_health_epi_group','t_health_epi_detail.b_health_epi_set_id','=','b_health_epi_group.b_health_epi_group_id')
     .leftJoin('b_employee as doc','t_health_epi_detail.health_epi_detail_staff_record','=','doc.b_employee_id')
