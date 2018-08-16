@@ -1,6 +1,6 @@
 import Knex = require('knex');
 import * as moment from 'moment';
-import * as multiline from 'multiline'
+//import * as multiline from 'multiline'
 
 export class bpModel {
 
@@ -16,7 +16,7 @@ export class bpModel {
   }
 
 
-  detail(knex: Knex, id: string, limit: number = 30 , offset: number = 0) {
+  detail(knex: Knex, id: string, limit: number = 25 , offset: number = 0) {
     return knex(this.tableName)
     .column(           
     't_visit_vital_sign.t_patient_id' 
@@ -32,34 +32,29 @@ export class bpModel {
       .limit(limit)
       .offset(offset);
   }
-  chart(knex: Knex, id: string, limit: number = 30 , offset: number = 0) {
+  chart(knex: Knex, id: string, limit: number = 10 , offset: number = 0) {
+    return knex(this.tableName)
+    .column(`g.t_patient_id`  )
+  .column(knex.raw('json_agg(g.record_date) as record_date'))
+  .column(knex.raw('json_agg(g.s) as s'))
+  .column(knex.raw('json_agg(g.d) as d')) 
+  .innerJoin(knex.raw(`(select t_visit_vital_sign.t_patient_id  ,t_visit_vital_sign.record_date   ,substring(visit_vital_sign_blood_presure,1,(position( \'/\' in visit_vital_sign_blood_presure)) -1) as s  , substring(visit_vital_sign_blood_presure,(position(   \'/\' in visit_vital_sign_blood_presure)) +1)as d   FROM t_visit_vital_sign   where t_visit_vital_sign.visit_vital_sign_blood_presure is not null   order By t_visit_vital_sign.record_date desc ) as g`) , function() {
+        this.on('t_visit_vital_sign.t_patient_id', '=', 'g.t_patient_id').andOn('t_visit_vital_sign.record_date', '=', 'g.record_date')
+      //  .andOn('g.t_patient_id', '=', id)
+         //   let sql:string = `select employee_login from b_employee where employee_login = ?`;
+          })
 
-      var query = multiline.stripIndent(function () {/*
-SELECT
-r.t_patient_id,
- json_agg(r.record_date) as record_date,
- json_agg(r.s) as s,
-json_agg(r.d) as d
-FROM (
-select
-t_visit_vital_sign.t_patient_id
-,t_visit_vital_sign.record_date
- ,substring(visit_vital_sign_blood_presure,1,(position('/' in visit_vital_sign_blood_presure)) -1) as s--ค่าความดันช่วงบน
-, substring(visit_vital_sign_blood_presure,(position('/' in visit_vital_sign_blood_presure)) +1)as d --ค่าความดันช่วงล่าง
+     
+    .where ('t_visit_vital_sign.visit_vital_sign_active','1') 
+    .where('t_visit_vital_sign.t_patient_id',id)    
+     .groupBy('g.t_patient_id')
+      .limit(limit)      
+      .offset(offset);
+     
+     // query = query.replace(/\n/g, '').replace(/\t/g, ' ');
+     //knex.raw("/")
 
-FROM t_visit_vital_sign
-     where t_visit_vital_sign.visit_vital_sign_active ='1'
-    and t_visit_vital_sign.visit_vital_sign_blood_presure<>''
-    --and t_visit_vital_sign.t_patient_id ='206108597153171662'
-      order By t_visit_vital_sign.record_date
-) AS r
-where r.t_patient_id ='206108597153171662'
-GROUP BY r.t_patient_id
-        */});
-      
-      query = query.replace(/\n/g, '').replace(/\t/g, ' ');
-      
-      return knex.raw(query, [])
+   
   }
 
   

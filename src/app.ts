@@ -112,7 +112,7 @@ app.use((req, res, next) => {
 app.use('/login',loginRoute);
 app.use('/contacts',checkAuth, contactRoute);
 app.use('/service', checkAuth, serviceRoute);
-app.use('/family',checkAuth, familyRoute);
+app.use('/family', familyRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum',checkAuth, kpiSum);
 app.use('/myapi',checkAuth, myApi);
