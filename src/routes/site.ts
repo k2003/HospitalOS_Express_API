@@ -16,5 +16,12 @@ router.get('/', (req, res, next) => {
       res.send({ ErrorConnection: false, PleaseCheck_env: error })
     });
 });
+router.post('/status', (req, res, next) => {
+  res.send({ 
+      ok: true, 
+      status: 'OK', 
+      vesrion: '0.3' 
+  });
+});
 
 export default router;

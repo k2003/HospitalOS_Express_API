@@ -18,8 +18,8 @@ router.get('/', (req, res, next) => {
 router.get('/name', (req, res, next) => {
   res.send({ 
       ok: true, 
-      name: 'สาธิต', 
-      sername: 'สีถาพล' 
+      name: 'คมสันต์', 
+      sername: 'จันทสีมา' 
   });
 });
 
@@ -44,7 +44,7 @@ router.get('/params/:id/:name', (req, res, next) => {
       ok: true, 
       id:id,
       name: name, 
-      sername: 'สีถาพล',
+      sername: 'K0MSANT JANTHASEMA',
       age: age
       
   });
