@@ -1,20 +1,17 @@
 import Knex = require('knex');
 import * as moment from 'moment';
-//import * as multiline from 'multiline'
+
 
 export class bpModel {
 
   public tableName  = 't_visit_vital_sign';
   public primaryKey = 't_patient_id';
 
-
-
   list(knex: Knex, limit: number = 20, offset: number = 0) {
     return knex(this.tableName)
       .limit(limit)
       .offset(offset);
   }
-
 
   detail(knex: Knex, id: string, limit: number = 25 , offset: number = 0) {
     return knex(this.tableName)
@@ -43,7 +40,6 @@ export class bpModel {
       //  .andOn('g.t_patient_id', '=', id)
          //   let sql:string = `select employee_login from b_employee where employee_login = ?`;
           })
-
      
     .where ('t_visit_vital_sign.visit_vital_sign_active','1') 
     .where('t_visit_vital_sign.t_patient_id',id)    
@@ -57,7 +53,6 @@ export class bpModel {
    
   }
 
-  
 
   bmi(knex: Knex, id: string, limit: number = 1 , offset: number = 0) {
     return knex(this.tableName)

@@ -103,20 +103,20 @@ router.get('/detail/:id', (req, res, next) => {
     });
 });
 
-router.delete('/:id', (req, res, next) => {
-  let id = req.params.id;
-  let db = req.db;
+// router.delete('/:id', (req, res, next) => {
+//   let id = req.params.id;
+//   let db = req.db;
 
-  model.remove(db, id)
-    .then((results: any) => {
-      res.send({ ok: true })
-    })
-    .catch(error => {
-      res.send({ ok: false, error: error })
-    })
-    .finally(() => {
-      db.destroy();
-    });
-});
+//   model.remove(db, id)
+//     .then((results: any) => {
+//       res.send({ ok: true })
+//     })
+//     .catch(error => {
+//       res.send({ ok: false, error: error })
+//     })
+//     .finally(() => {
+//       db.destroy();
+//     });
+// });
 
 export default router;

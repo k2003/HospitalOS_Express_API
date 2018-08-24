@@ -6,15 +6,11 @@ export class appointModel {
   public tableName  = 't_patient_appointment';
   public primaryKey = 't_patient_id';
 
-
-
   list(knex: Knex, limit: number = 20, offset: number = 0) {
     return knex(this.tableName)
       .limit(limit)
       .offset(offset);
   }
-
-
   detail(knex: Knex, id: string, limit: number = 50 , offset: number = 0) {
     return knex(this.tableName)
     .column(           

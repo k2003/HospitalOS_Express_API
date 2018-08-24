@@ -1,17 +1,9 @@
 'use strict';
-
 import * as express from 'express';
 import * as moment from 'moment';
-
 import { familyModel } from "../models/family";
-
 const router = express.Router();
-
 const model = new familyModel();
-
-
-
-
 router.get('/', (req, res, next) => {
 
   let db = req.db;
@@ -25,17 +17,13 @@ router.get('/', (req, res, next) => {
     });
 });
 
-
-
-
 router.get('/detail/:id', (req, res, next) => {
   let id = req.params.id;
   let db = req.db;
 
   model.detail(db, id)
     .then((results: any) => {
-    //  res.send({ ok: true, detail: results })
-     // res.send({ ok: true, detail: results })
+
       res.send({ ok: true, detail: results });
     })
     .catch(error => {
@@ -45,7 +33,5 @@ router.get('/detail/:id', (req, res, next) => {
       db.destroy();
     });
 });
-
-
 
 export default router;

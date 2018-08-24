@@ -1,19 +1,10 @@
 'use strict';
-
 import * as express from 'express';
 import * as moment from 'moment';
-
 import { bpModel } from "../models/bp";
-
 const router = express.Router();
-
 const model = new bpModel();
-
-
-
-
 router.get('/', (req, res, next) => {
-
   let db = req.db;
 
   model.list(db)
@@ -25,17 +16,12 @@ router.get('/', (req, res, next) => {
     });
 });
 
-
-
-
 router.get('/bmi/:id', (req, res, next) => {
   let id = req.params.id;
   let db = req.db;
 
   model.bmi(db, id)
     .then((results: any) => {
-    //  res.send({ ok: true, detail: results })
-     // res.send({ ok: true, detail: results })
       res.send({ ok: true, bmi: results });
     })
     .catch(error => {
@@ -51,8 +37,6 @@ router.get('/detail/:id', (req, res, next) => {
 
   model.detail(db, id)
     .then((results: any) => {
-    //  res.send({ ok: true, detail: results })
-     // res.send({ ok: true, detail: results })
       res.send({ ok: true, detail: results });
     })
     .catch(error => {
@@ -65,11 +49,11 @@ router.get('/detail/:id', (req, res, next) => {
 router.get('/chart/:id', (req, res, next) => {
   let id = req.params.id;
   let db = req.db;
-
   model.chart(db, id)
     .then((results: any) => {
-
-      res.send({ ok: true, chart: results });
+      res.send({
+        
+        chart:results });
     })
     .catch(error => {
       res.send({ ok: false, error: error })
@@ -78,7 +62,4 @@ router.get('/chart/:id', (req, res, next) => {
       db.destroy();
     });
 });
-
-
-
 export default router;

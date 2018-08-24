@@ -3,16 +3,13 @@ require('dotenv').config();
 import Knex = require('knex');
 import { ConnectionConfig } from 'knex';
 import { Jwt } from './models/jwt';
-
 import * as express from 'express';
 import * as path from 'path';
-//import * as favicon from 'serve-favicon';
 import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as ejs from 'ejs';
-
 import indexRoute from './routes';
 import contactRoute from './routes/contact';
 import loginRoute from './routes/login';
@@ -20,7 +17,6 @@ import kpiList from './routes/kpiList';
 import kpiSum from './routes/kpiSum';
 import myApi from './routes/myapi';
 import SiteRoute from './routes/site';
-import profileRoute from  './routes/profile';
 import serviceRoute from './routes/service';
 import familyRoute from './routes/family';
 import appointRoute from './routes/appoint';
@@ -58,7 +54,6 @@ let checkAuth = (req, res, next) => {
 
 let dbConnection: ConnectionConfig = {
   host: process.env.DB_HOST,
-  //port: +process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
@@ -66,13 +61,10 @@ let dbConnection: ConnectionConfig = {
 }
 
 const app: express.Express = express();
-
 //view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.engine('.html', ejs.renderFile);
 app.set('view engine', 'html');
-
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -116,11 +108,10 @@ app.use('/family' ,checkAuth, familyRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum',checkAuth, kpiSum);
 app.use('/myapi',checkAuth, myApi);
-app.use('/profile' ,checkAuth, profileRoute);
 app.use('/appoint' , checkAuth,appointRoute);
 app.use('/drugallergy' ,checkAuth, adrRoute);
 app.use('/vaccine' , checkAuth, vaccineRoute);
-app.use('/bp' , checkAuth, bpRoute);
+app.use('/bp' ,checkAuth, bpRoute);
 app.use('/order' ,checkAuth, OrderItemRoute);
 app.use('/lab' ,checkAuth, LabNcdRoute);
 app.use('/site' , SiteRoute);
