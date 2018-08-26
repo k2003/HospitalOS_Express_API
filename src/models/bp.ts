@@ -29,23 +29,35 @@ export class bpModel {
       .limit(limit)
       .offset(offset);
   }
-  chart(knex: Knex, id: string, limit: number = 10 , offset: number = 0) {
+  chart(knex: Knex, id: string, limit: number = 20 , offset: number = 0) {
     return knex(this.tableName)
-    .column(`g.t_patient_id`  )
-  .column(knex.raw('json_agg(g.record_date) as record_date'))
-  .column(knex.raw('json_agg(g.s) as s'))
-  .column(knex.raw('json_agg(g.d) as d')) 
-  .innerJoin(knex.raw(`(select t_visit_vital_sign.t_patient_id  ,t_visit_vital_sign.record_date   ,substring(visit_vital_sign_blood_presure,1,(position( \'/\' in visit_vital_sign_blood_presure)) -1) as s  , substring(visit_vital_sign_blood_presure,(position(   \'/\' in visit_vital_sign_blood_presure)) +1)as d   FROM t_visit_vital_sign   where t_visit_vital_sign.visit_vital_sign_blood_presure is not null   order By t_visit_vital_sign.record_date desc ) as g`) , function() {
-        this.on('t_visit_vital_sign.t_patient_id', '=', 'g.t_patient_id').andOn('t_visit_vital_sign.record_date', '=', 'g.record_date')
-      //  .andOn('g.t_patient_id', '=', id)
-         //   let sql:string = `select employee_login from b_employee where employee_login = ?`;
-          })
-     
+    .column(knex.raw('distinct t_visit_vital_sign.record_date'))
+    .column(knex.raw(`substring(visit_vital_sign_blood_presure,1,(position(\'/\' in visit_vital_sign_blood_presure)) -1)::int as s`))
+    .column(knex.raw(`substring(visit_vital_sign_blood_presure,(position(\'/\' in visit_vital_sign_blood_presure)) +1)::int as d `))
     .where ('t_visit_vital_sign.visit_vital_sign_active','1') 
+    .whereNot('t_visit_vital_sign.visit_vital_sign_blood_presure','')
     .where('t_visit_vital_sign.t_patient_id',id)    
-     .groupBy('g.t_patient_id')
+    .orderBy('t_visit_vital_sign.record_date','DESC')
       .limit(limit)      
       .offset(offset);
+
+    
+
+
+     
+  //   .column(`g.t_patient_id`  )
+  // .column(knex.raw('json_agg(g.record_date) as record_date'))
+  // .column(knex.raw('json_agg(g.s) as s'))
+  // .column(knex.raw('json_agg(g.d) as d')) 
+  // .innerJoin(knex.raw(`(select t_visit_vital_sign.t_patient_id  ,t_visit_vital_sign.record_date   ,substring(visit_vital_sign_blood_presure,1,(position( \'/\' in visit_vital_sign_blood_presure)) -1)::int as s  , substring(visit_vital_sign_blood_presure,(position(   \'/\' in visit_vital_sign_blood_presure)) +1)::int as d   FROM t_visit_vital_sign   where t_visit_vital_sign.visit_vital_sign_blood_presure is not null   order By t_visit_vital_sign.record_date desc ) as g`) , function() {
+  //       this.on('t_visit_vital_sign.t_patient_id', '=', 'g.t_patient_id').andOn('t_visit_vital_sign.record_date', '=', 'g.record_date')
+  //  })
+     
+  //   .where ('t_visit_vital_sign.visit_vital_sign_active','1') 
+  //   .where('t_visit_vital_sign.t_patient_id',id)    
+  //    .groupBy('g.t_patient_id')
+  //     .limit(limit)      
+  //     .offset(offset);
      
      // query = query.replace(/\n/g, '').replace(/\t/g, ' ');
      //knex.raw("/")

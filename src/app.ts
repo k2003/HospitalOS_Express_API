@@ -101,6 +101,21 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.use('/login',loginRoute);
+// app.use('/contacts', contactRoute);
+// app.use('/service',  serviceRoute);
+// app.use('/family' , familyRoute);
+// app.use('/kpilist',checkAuth, kpiList);
+// app.use('/kpisum',checkAuth, kpiSum);
+// app.use('/myapi',checkAuth, myApi);
+// app.use('/appoint' ,appointRoute);
+// app.use('/drugallergy' , adrRoute);
+// app.use('/vaccine' , vaccineRoute);
+// app.use('/bp' , bpRoute);
+// app.use('/order' , OrderItemRoute);
+// app.use('/lab' , LabNcdRoute);
+// app.use('/site' , SiteRoute);
+// app.use('/', indexRoute);
 app.use('/login',loginRoute);
 app.use('/contacts',checkAuth, contactRoute);
 app.use('/service', checkAuth, serviceRoute);
