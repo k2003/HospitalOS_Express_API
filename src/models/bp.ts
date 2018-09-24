@@ -29,13 +29,17 @@ export class bpModel {
       .limit(limit)
       .offset(offset);
   }
-  chart(knex: Knex, id: string, limit: number = 20 , offset: number = 0) {
+  chart(knex: Knex, id: string, limit: number = 10 , offset: number = 0) {
     return knex(this.tableName)
     .column(knex.raw('distinct t_visit_vital_sign.record_date'))
     .column(knex.raw(`substring(visit_vital_sign_blood_presure,1,(position(\'/\' in visit_vital_sign_blood_presure)) -1)::int as s`))
     .column(knex.raw(`substring(visit_vital_sign_blood_presure,(position(\'/\' in visit_vital_sign_blood_presure)) +1)::int as d `))
+    .column(knex.raw(`(t_visit_vital_sign.visit_vital_sign_respiratory_rate)::int as res`))
+    .column(knex.raw(`(t_visit_vital_sign.visit_vital_sign_heart_rate)::int as pulse`))
     .where ('t_visit_vital_sign.visit_vital_sign_active','1') 
     .whereNot('t_visit_vital_sign.visit_vital_sign_blood_presure','')
+    .whereNot('t_visit_vital_sign.visit_vital_sign_respiratory_rate','')
+    .whereNot('t_visit_vital_sign.visit_vital_sign_heart_rate as pulse','')
     .where('t_visit_vital_sign.t_patient_id',id)    
     .orderBy('t_visit_vital_sign.record_date','DESC')
       .limit(limit)      
