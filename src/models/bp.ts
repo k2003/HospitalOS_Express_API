@@ -39,7 +39,7 @@ export class bpModel {
     .where ('t_visit_vital_sign.visit_vital_sign_active','1') 
     .whereNot('t_visit_vital_sign.visit_vital_sign_blood_presure','')
     .whereNot('t_visit_vital_sign.visit_vital_sign_respiratory_rate','')
-    .whereNot('t_visit_vital_sign.visit_vital_sign_heart_rate as pulse','')
+    .whereNot('t_visit_vital_sign.visit_vital_sign_heart_rate','')
     .where('t_visit_vital_sign.t_patient_id',id)    
     .orderBy('t_visit_vital_sign.record_date','DESC')
       .limit(limit)      
