@@ -35,6 +35,9 @@ npm start
 ```
 open browser and go to http://localhost:3000
 
+test connect db postgres
+open browser and go to http://localhost:3000/site
+
 # PM2
 ```
 pm2 start --interpreter ts-node src/bin/www.ts MyServerName
