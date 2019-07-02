@@ -38,10 +38,12 @@ npm start
 ```
 open browser and go to http://localhost:3000
 ```
+![Screenshot](api1.png)
 ```
 test connect db postgres
 open browser and go to http://localhost:3000/site
 ```
+![Screenshot](api2.png)
 # PM2
 ```
 pm2 start --interpreter ts-node src/bin/www.ts MyServerName
