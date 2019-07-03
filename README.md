@@ -13,6 +13,10 @@ git clone https://github.com/k2003/HospitalOS_Express_API.git myApi
 cd myApi
 npm i
 
+and 
+
+tsc
+
 ```
 ## Setting Connection
 
@@ -33,6 +37,11 @@ PORT=3000
 ```
 cp env.txt .env
 npm start
+
+or 
+
+nodemon
+
 ```
 
 ## TEST
