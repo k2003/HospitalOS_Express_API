@@ -7,4 +7,5 @@ npm-debug.log
 bower_components/*
 .env
 .vscode
+.png
 uploads/*

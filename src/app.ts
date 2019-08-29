@@ -19,6 +19,7 @@ import myApi from './routes/myapi';
 import SiteRoute from './routes/site';
 import serviceRoute from './routes/service';
 import familyRoute from './routes/family';
+import personRoute from './routes/personlist';
 import appointRoute from './routes/appoint';
 import adrRoute from './routes/adr';
 import vaccineRoute from './routes/vaccine';
@@ -130,6 +131,7 @@ app.use('/bp' ,checkAuth, bpRoute);
 app.use('/order' ,checkAuth, OrderItemRoute);
 app.use('/lab' ,checkAuth, LabNcdRoute);
 app.use('/site' , SiteRoute);
+app.use('/person' , personRoute);
 app.use('/', indexRoute);
 
 
