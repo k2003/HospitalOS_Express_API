@@ -67,8 +67,10 @@ app.set('views', path.join(__dirname, '../views'));
 app.engine('.html', ejs.renderFile);
 app.set('view engine', 'html');
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'50mb'}));
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended:true, limit:'50mb'} ));
 app.use(cookieParser());
 app.use(cors());
 
@@ -102,24 +104,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/login',loginRoute);
-// app.use('/contacts', contactRoute);
-// app.use('/service',  serviceRoute);
-// app.use('/family' , familyRoute);
-// app.use('/kpilist',checkAuth, kpiList);
-// app.use('/kpisum',checkAuth, kpiSum);
-// app.use('/myapi',checkAuth, myApi);
-// app.use('/appoint' ,appointRoute);
-// app.use('/drugallergy' , adrRoute);
-// app.use('/vaccine' , vaccineRoute);
-// app.use('/bp' , bpRoute);
-// app.use('/order' , OrderItemRoute);
-// app.use('/lab' , LabNcdRoute);
-// app.use('/site' , SiteRoute);
-// app.use('/', indexRoute);
 app.use('/login',loginRoute);
 app.use('/contacts',checkAuth, contactRoute);
-app.use('/service', checkAuth, serviceRoute);
+app.use('/service',checkAuth,  serviceRoute);
 app.use('/family' ,checkAuth, familyRoute);
 app.use('/kpilist',checkAuth, kpiList);
 app.use('/kpisum',checkAuth, kpiSum);
@@ -131,7 +118,7 @@ app.use('/bp' ,checkAuth, bpRoute);
 app.use('/order' ,checkAuth, OrderItemRoute);
 app.use('/lab' ,checkAuth, LabNcdRoute);
 app.use('/site' , SiteRoute);
-app.use('/person' , personRoute);
+app.use('/person' ,checkAuth , personRoute);
 app.use('/', indexRoute);
 
 

@@ -23,5 +23,15 @@ router.post('/status', (req, res, next) => {
       vesrion: '0.3' 
   });
 });
+router.get('/nrd', (req, res, next) => {
+  let db = req.db;
+  model.nrd(db)
+    .then((results: any) => {
+      res.send({ ok: true, rows: results });
+    })
+    .catch(error => {
+      res.send({ ok: false, error: error })
+    });
+});
 
 export default router;
