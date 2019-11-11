@@ -51,6 +51,7 @@ router.get('/hn', async (req, res) => {  // ใช้ async function
   )
   .column(db.raw('case when t_patient.picture_profile  IS NOT NULL then	regexp_replace(encode(t_patient.picture_profile,\'base64\'),\'\r|\n\',\'\',\'g\') else null end 	as picture_profile'))
   .where('t_patient.patient_active','=','1')
+     .whereFRaw(`t_patient.picture_profile IS NULL`)
      .where('patient_hn', 'ilike', `%${req.query.hn || ''}%`)
      //.where('person_hcis','like',req.query.hn)
    } else {
