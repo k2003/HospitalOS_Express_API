@@ -88,6 +88,7 @@ export class personlistModel {
     ,'t_visit.visit_bed'
     ,'b_employee.employee_firstname'
     ,'b_employee.employee_lastname'
+    ,'b_visit_ward.visit_ward_description'
   )
   .column(knex.raw('case when t_patient.picture_profile  IS NOT NULL then	regexp_replace(encode(t_patient.picture_profile,\'base64\'),\'\r|\n\',\'\',\'g\') else null end 	as picture_profile'))
   .innerJoin('t_visit','t_visit.t_patient_id','=','t_patient.t_patient_id')
