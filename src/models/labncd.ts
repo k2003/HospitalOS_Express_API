@@ -29,7 +29,7 @@ export class labNcdModel {
     .innerJoin('b_item_lab_ncd_std','b_item_map_lab_ncd.b_item_lab_ncd_std_id','=','b_item_lab_ncd_std.b_item_lab_ncd_std_id')
     .where({'t_result_lab.result_lab_active':'1',
      'b_item_map_lab_ncd.active':'1','b_item_lab_ncd_std.active':'1'})
-    .whereIn('b_item_lab_ncd_std.b_item_lab_ncd_std_id', ['ncd201000000000004' 
+    .whereIn('b_item_lab_ncd_std.b_item_lab_ncd_std_id', ['ncd201000000000004','ncd201900000000489' 
      ,'ncd201000000000002','ncd201000000000003','ncd201000000000006','ncd201000000000008'
      ,'ncd201000000000007','ncd201000000000009','ncd201000000000010','ncd201000000000030'])
     .where('t_result_lab.result_lab_value', '~',`^([0-9]+\.?[0-9]*|\.[0-9]+)$`)
